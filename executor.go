@@ -2,6 +2,7 @@ package block_stm
 
 import (
 	"context"
+	"fmt"
 )
 
 // Executor fields are not mutated during execution.
@@ -61,6 +62,7 @@ func (e *Executor) Run() {
 }
 
 func (e *Executor) TryExecute(version TxnVersion) (TxnVersion, TaskKind) {
+	fmt.Printf("TryExecute:: version: %v\n", version)
 	e.scheduler.executedTxns.Add(1)
 	view := e.execute(version.Index)
 	wroteNewLocation := e.mvMemory.Record(version, view)

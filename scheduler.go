@@ -178,6 +178,7 @@ func (s *Scheduler) ResumeDependencies(txns []TxnIndex) {
 
 // Invariant `num_active_tasks`: decreased if an invalid task is returned.
 func (s *Scheduler) FinishExecution(version TxnVersion, wroteNewPath bool) (TxnVersion, TaskKind) {
+	fmt.Printf("FinishExecution:: version: %v, wroteNewPath: %v\n", version, wroteNewPath)
 	s.txn_status[version.Index].SetExecuted()
 
 	deps := s.txn_dependency[version.Index].Swap(nil)
